@@ -27,14 +27,35 @@ class WeatherAPIService
     public function fetchFromWeatherApi(
         API_Weather_Interface $API_Weather_Interface,
         array                 $queryParams,
+        bool                $cron = false
     ): array
     {
         $endpoint = $API_Weather_Interface->getEndpoint();
         $cacheKey = $API_Weather_Interface->getCacheKey();
         $ttl = $API_Weather_Interface->getTtl();
 
-        return $this->cache->get($cacheKey, function (ItemInterface $item) use ($endpoint, $queryParams, $ttl) {
+        return $cron
+            ? (function () use ($cacheKey, $endpoint, $queryParams, $ttl) {
+                $response = $this->client->request('GET', "http://api.weatherapi.com/v1/{$endpoint}", [
+                    'query' => array_merge(['key' => $this->apiKey], $queryParams)
+                ]);
+
+                if ($response->getStatusCode() !== 200) {
+                    throw new \RuntimeException("API request failed: {$response->getStatusCode()}");
+                }
+
+                $data = $response->toArray();
+
+                $item = $this->cache->getItem($cacheKey);
+                $item->set($data);
+                $item->expiresAfter($ttl);
+                $this->cache->save($item);
+
+                return $data;
+            })()
+        : $this->cache->get($cacheKey, function (ItemInterface $item) use ($endpoint, $queryParams, $ttl, $cron, $cacheKey) {
             $item->expiresAfter($ttl);
+
             $response = $this->client->request('GET', "http://api.weatherapi.com/v1/{$endpoint}", [
                 'query' => array_merge([
                     'key' => $this->apiKey
@@ -46,5 +67,7 @@ class WeatherAPIService
             }
             return $response->toArray();
         });
+
+
     }
 }

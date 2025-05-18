@@ -30,7 +30,7 @@ class WeatherUpdateService
             try {
                 $city = $subscription->getCity();
                 $API_Weather_ForecastDTO = new API_Weather_ForecastDTO($subscription);;
-                $this->weatherAPIService->fetchFromWeatherApi($API_Weather_ForecastDTO, ['q' => $city, 'aqi' => 'no']);
+                $this->weatherAPIService->fetchFromWeatherApi($API_Weather_ForecastDTO, ['q' => $city, 'aqi' => 'no'], true);
             } catch (\Exception $e) {
                 continue;
             }

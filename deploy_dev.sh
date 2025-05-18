@@ -37,4 +37,7 @@ fi
 echo "🧹 Clearing Symfony cache..."
 docker-compose exec app php bin/console cache:clear
 
+echo "🧹 Flushing Redis cache..."
+docker-compose exec app redis-cli -h redis FLUSHALL
+
 echo "✅ Project setup complete."
