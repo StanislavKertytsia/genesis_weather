@@ -40,7 +40,6 @@
 * git clone https://github.com/StanislavKertytsia/genesis_weather.git
 * cd genesis_weather
 * chmod +x deploy_dev.sh
-* **./deploy_dev.sh --resetdb**: команда поднимает все сервисы Docker, удаляет данные из базы, загружает новые из fixtures, выполняет миграции и очищает кэш приложения.
-* **./deploy_dev.sh**: команда поднимает все сервисы Docker, выполняет миграции и очищает кэш приложения.
+* **./deploy_dev.sh --resetdb**: команда поднимает все сервисы Docker, удаляет данные из базы, загружает новые из fixtures, выполняет миграцию и очищает кэш приложения.
 * **app**: http://localhost:8080/
 * **mail**: http://localhost:8025/
