@@ -14,6 +14,10 @@ docker-compose up -d --build
 
 sleep 5
 
+echo "📦 Installing composer dependencies..."
+docker-compose exec app composer install --no-interaction --optimize-autoloader --no-dev
+
+
 if [ "$RESET_DB" = true ]; then
   echo "🧨 Resetting PostgreSQL volume..."
 
