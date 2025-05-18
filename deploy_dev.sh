@@ -15,7 +15,7 @@ docker-compose up -d --build
 sleep 5
 
 echo "📦 Installing composer dependencies..."
-docker-compose exec app composer install --no-interaction --optimize-autoloader --no-dev
+docker-compose exec app composer install --no-interaction --optimize-autoloader
 
 
 if [ "$RESET_DB" = true ]; then
