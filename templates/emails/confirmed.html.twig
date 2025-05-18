@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="confirmation-container">
+        <p>Your email: <strong>{{ email }}</strong> has been successfully confirmed.</p>
+        <p>Thank you for subscribing to weather updates!</p>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .confirmation-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-family: "Segoe UI", sans-serif;
+            color: #333;
+        }
+    </style>
+{% endblock %}

@@ -1,0 +1,26 @@
+parameters:
+  jwt_secret_key: '%env(JWT_SECRET_KEY)%'
+
+services:
+
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+
+  App\:
+    resource: '../src/'
+    exclude:
+      - '../src/DependencyInjection/'
+      - '../src/Entity/'
+      - '../src/Kernel.php'
+
+  App\Service\JwtService:
+    arguments:
+      $secretKey: '%jwt_secret_key%'
+
+
+  App\Service\WeatherAPIService:
+    arguments:
+      $apiKey: '%env(resolve:WEATHER_API_KEY)%'
+      $cache: '@cache.app'

@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Subscription Confirmation{% endblock %}
+
+{% block body %}
+    <div class="confirmation-container">
+        <h1>Subscription Confirmation</h1>
+
+        {% if error is defined and error %}
+            <div class="error-message">{{ error }}</div>
+        {% elseif message is defined and message %}
+            <div class="success-message">{{ message }}</div>
+            <a href="{{ path('app_main') }}" class="confirm-link">Go to Homepage</a>
+        {% else %}
+            <p>Something went wrong. Please try to subscribe again</p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .confirmation-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-family: "Segoe UI", sans-serif;
+            color: #333;
+        }
+
+        .error-message {
+            color: #b30000;
+            background-color: #ffe5e5;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .success-message {
+            color: #155724;
+            background-color: #d4edda;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .confirm-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 18px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .confirm-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+{% endblock %}

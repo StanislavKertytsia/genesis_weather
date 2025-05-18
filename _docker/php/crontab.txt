@@ -1,0 +1,2 @@
+0 * * * * /usr/local/bin/php /app/bin/console app:weather:update hourly >> /var/log/cron.log 2>&1
+0 6 * * * /usr/local/bin/php /app/bin/console app:weather:update daily >> /var/log/cron.log 2>&1

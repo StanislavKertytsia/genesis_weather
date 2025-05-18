@@ -1,0 +1,9 @@
+services:
+  App\Service\JwtService:
+    public: true
+
+  App\Repository\SubscriptionRepository:
+    public: true
+
+  App\Service\WeatherAPIService:
+    public: true

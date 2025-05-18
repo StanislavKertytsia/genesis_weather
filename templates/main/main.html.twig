@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome, {{ subscription.email }}!{% endblock %}
+
+{% block body %}
+    <div class="confirmation-container">
+        <h1>Welcome back, {{ subscription.email }}!</h1>
+
+        <p><strong>Your city:</strong> {{ subscription.city }}</p>
+        <p><strong>Update frequency:</strong> {{ subscription.frequency.value|capitalize }}</p>
+
+        <p>Here is your personalized weather forecast:</p>
+
+        {% if forecast is not empty %}
+            <div class="weather-block">
+                <p><strong>Temperature:</strong> {{ forecast.current.temp_c }} °C</p>
+                <p><strong>Condition:</strong> {{ forecast.current.condition.text }}</p>
+                <img src="{{ forecast.current.condition.icon }}" alt="{{ forecast.current.condition.text }}">
+                <p><strong>Humidity:</strong> {{ forecast.current.humidity }}%</p>
+                <p><strong>Wind:</strong> {{ forecast.current.wind_kph }} kph</p>
+            </div>
+        {% else %}
+            <p>Sorry, forecast data is not available at the moment.</p>
+        {% endif %}
+
+        <div class="button-group">
+            <a href="{{ path('app_logout') }}" class="confirm-link">Logout</a>
+            <a href="{{ path('unsubscribe', {'token': token}) }}" class="confirm-link danger">Unsubscribe</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .confirmation-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-family: "Segoe UI", sans-serif;
+            color: #333;
+        }
+
+        .weather-block {
+            margin-top: 20px;
+            background-color: #eef6ff;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .weather-block img {
+            vertical-align: middle;
+            margin: 10px 0;
+        }
+
+        .button-group {
+            margin-top: 30px;
+        }
+
+        .confirm-link {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 10px 18px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .confirm-link:hover {
+            background-color: #0056b3;
+        }
+
+        .confirm-link.danger {
+            background-color: #dc3545;
+        }
+
+        .confirm-link.danger:hover {
+            background-color: #b02a37;
+        }
+    </style>
+{% endblock %}

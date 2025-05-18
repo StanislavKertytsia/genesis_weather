@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="confirmation-container">
+        <p>Thank you for subscribing. Please confirm your email by clicking the link below:</p>
+        <p><a href="{{ link }}" class="confirm-link">Confirm subscription</a></p>
+        <p class="expiration-note">This link is valid for 24 hours.</p>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .confirmation-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-family: "Segoe UI", sans-serif;
+            color: #333;
+        }
+
+        .confirm-link {
+            display: inline-block;
+            margin: 15px 0;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .confirm-link:hover {
+            background-color: #0056b3;
+        }
+
+        .expiration-note {
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+{% endblock %}

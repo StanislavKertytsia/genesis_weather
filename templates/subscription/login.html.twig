@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <div class="confirmation-container">
+        {% for message in app.flashes('message') %}
+            <div class="success-message">{{ message }}</div>
+        {% endfor %}
+
+        <h1>Login to your Weather Forecast</h1>
+
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="form-group">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-input'}}) }}
+            {{ form_errors(form.email) }}
+        </div>
+
+        <button type="submit" class="confirm-link">Login</button>
+
+        <p class="small-note">Don't have a subscription?
+            <a href="{{ path('app_subscribe') }}">Subscribe</a>
+        </p>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .confirmation-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-family: "Segoe UI", sans-serif;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+
+        .confirm-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 18px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .confirm-link:hover {
+            background-color: #0056b3;
+        }
+
+        .small-note {
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
+
+        .success-message {
+            color: #155724;
+            background-color: #d4edda;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+{% endblock %}
